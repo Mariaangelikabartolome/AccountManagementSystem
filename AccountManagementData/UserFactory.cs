@@ -8,12 +8,11 @@ namespace AccountManagementData
 
         public List<User> GetDummyUsers()
         {
-            dummyUsers.Add(CreateDummyUser("Admin123!", "Admin", "Admin@pup.com", 2)); //Updated to Inactive
+            dummyUsers.Add(CreateDummyUser("Admin123!", "Admin", "Admin@pup.com", 1)); 
             dummyUsers.Add(CreateDummyUser("Test123!", "Test", "Test@pup.com", 1));
             dummyUsers.Add(CreateDummyUser("Hello123!", "Hello", "Hello@pup.com", 1));
-            dummyUsers.Add(CreateDummyUser("Bye123!", "Bye", "Bye@pup.com", 2)); //Updated to Inactive
-            dummyUsers.Add(CreateDummyUser("Angelikabartolome1005 ", "AngelCutie", "MariaAngelika@gmail.com", 1)); //Added User
-            dummyUsers.Add(CreateDummyUser("MariaAngelika", "Mariae", "Angelikaaa123@gmail.com", 2));// Added User
+            dummyUsers.Add(CreateDummyUser("Bye123!", "Bye", "Bye@pup.com", 1)); 
+            dummyUsers.Add(CreateDummyUser("Angelikabartolome1005 ", "AngelGanda", "MariaAngelika@gmail.com", 1)); 
             return dummyUsers;
         }
 

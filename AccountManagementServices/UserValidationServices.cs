@@ -1,21 +1,23 @@
-﻿namespace AccountManagementServices
+﻿using AccountManagementData;
+
+public class UserValidationServices
 {
-    public class UserValidationServices
+    private UserGetServices getServices;
+
+    public UserValidationServices(UserData userData)
     {
+        getServices = new UserGetServices(userData);
+    }
 
-        UserGetServices getservices = new UserGetServices();
+    public bool CheckIfUserNameExists(string username)
+    {
+        bool result = getServices.GetUser(username) != null;
+        return result;
+    }
 
-        public bool CheckIfUserNameExists(string username)
-        {
-            bool result = getservices.GetUser(username) != null;
-            return result;
-        }
-
-        public bool CheckIfUserExists(string username, string password)
-        {
-            bool result = getservices.GetUser(username, password) != null;
-            return result;
-        }
-
+    public bool CheckIfUserExists(string username, string password)
+    {
+        bool result = getServices.GetUser(username, password) != null;
+        return result;
     }
 }

@@ -1,50 +1,49 @@
 ﻿using AccountManagementData;
 using AccountManagementModel;
-namespace AccountManagementServices
+
+public class UserGetServices
 {
-    public class UserGetServices
+    private UserData _userData;
+
+    public UserGetServices(UserData userData)
     {
-        private List<User> GetAllUsers()
-        {
-            UserData userData = new UserData();
-            return userData.GetUsers();
-        }
+        _userData = userData;
+    }
 
-        public List<User> GetUsersByStatus(int userStatus)
+    public List<User> GetUsersByStatus(int userStatus)
+    {
+        List<User> usersByStatus = new List<User>();
+        foreach (var user in _userData.GetUsers())
         {
-            List<User> usersByStatus = new List<User>();
-            foreach (var user in GetAllUsers())
+            if (user.status == userStatus)
             {
-                if (user.status == userStatus)
-                {
-                    usersByStatus.Add(user);
-                }
+                usersByStatus.Add(user);
             }
-            return usersByStatus;
         }
+        return usersByStatus;
+    }
 
-        public User GetUser(string username, string password)
+    public User GetUser(string username, string password)
+    {
+        foreach (var user in _userData.GetUsers())
         {
-            foreach (var user in GetAllUsers())
+            if (user.username == username && user.password == password)
             {
-                if (user.username == username && user.password == password)
-                {
-                    return user;
-                }
+                return user;
             }
-            return null;
         }
+        return null;
+    }
 
-        public User GetUser(string username)
+    public User GetUser(string username)
+    {
+        foreach (var user in _userData.GetUsers())
         {
-            foreach (var user in GetAllUsers())
+            if (user.username == username)
             {
-                if (user.username == username)
-                {
-                    return user;
-                }
+                return user;
             }
-            return null;
         }
+        return null;
     }
 }

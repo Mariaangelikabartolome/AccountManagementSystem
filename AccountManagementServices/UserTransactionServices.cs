@@ -1,37 +1,38 @@
 ﻿using AccountManagementData;
 using AccountManagementModel;
 
-namespace AccountManagementServices
+public class UserTransactionServices
 {
-    public class UserTransactionServices
+    UserValidationServices validationServices;
+    UserData _userData;
+
+    public UserTransactionServices(UserData userData)
     {
-        UserValidationServices validationServices = new UserValidationServices();
-        UserData userData = new UserData();
+        _userData = userData;
+        validationServices = new UserValidationServices(_userData);
+    }
 
-        public bool CreateUser(User user)
+    public bool CreateUser(User user)
+    {
+        bool result = validationServices.CheckIfUserNameExists(user.username);
+
+        if (!result)
         {
-            bool result = validationServices.CheckIfUserNameExists(user.username);
-
-            if (result)
-            {
-                userData.AddUser(user);
-            }
-
-            return result;
+            _userData.AddUser(user);
         }
 
-        public bool UpdateUser(User user)
+        return !result;
+    }
+
+    public bool UpdateUser(User user)
+    {
+        bool result = validationServices.CheckIfUserNameExists(user.username);
+
+        if (result)
         {
-            bool result = validationServices.CheckIfUserNameExists(user.username);
-
-            if (result)
-            {
-                userData.UpdateUser(user);
-            }
-
-            return result;
+            _userData.UpdateUser(user);
         }
 
-
+        return result;
     }
 }
